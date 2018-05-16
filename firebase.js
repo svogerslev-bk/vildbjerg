@@ -66,13 +66,15 @@ function getMatchInfo(nextMatchElmnt, todaysMatchesElmnt) {
       if (matches.length > 0) {
         var match = matches[0];
         var opponent = match.team1 == 'SBK' ? match.team2 : match.team1;
-        nextMatchElmnt.innerHTML = 'Næste kamp er ' + match._class + ' mod ' + opponent + ' kl ' + match.startTime + ' på ' + match.place;
+        nextMatchElmnt.innerHTML = 'Næste kamp er ' + match._class + '<br/>' +
+          match.team1 + ' - ' + match.team2 + '<br/>' +
+           ' kl ' + match.startTime + ' på ' + match.place;
       }
     }
     if (todaysMatchesElmnt) {
       var result = '';
       matches.forEach(function(match) {
-        result += match._class + ' mod ' + opponent + ' kl ' + match.startTime + ' på ' + match.place + '</br>';
+        result += '> ' + match._class + ' mod ' + opponent + ' kl ' + match.startTime + ' på ' + match.place + ' <</br>';
       });
       todaysMatchesElmnt.innerHTML = result;
     }

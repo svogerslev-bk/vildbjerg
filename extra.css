@@ -189,13 +189,17 @@ ul ul a {
   text-align: center;
   border: 1px solid #666;
   background-color: white;
+  line-height: 1.2;
+  padding: 6px;
 }
 
 #todaysMatchesHeader {
   text-align: center;
+  font-weight: bold;
 }
 
 #todaysMatches {
+  font-size: 18px;
   font-weight: bold;
   text-align: center;
 }
