@@ -74,7 +74,7 @@ function getMatchInfo(nextMatchElmnt, todaysMatchesElmnt) {
     if (todaysMatchesElmnt) {
       var result = '';
       matches.forEach(function(match) {
-        result += '> ' + match._class + ' mod ' + opponent + ' kl ' + match.startTime + ' på ' + match.place + ' <</br>';
+        result += match._class + ' mod ' + opponent + ' kl ' + match.startTime + ' på ' + match.place + '</br>';
       });
       todaysMatchesElmnt.innerHTML = result;
     }
