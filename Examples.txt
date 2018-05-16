@@ -1,0 +1,35 @@
+Farver
+----------------------------------------
+#d04321;
+#da5434;
+
+
+Gammel eksempelkode
+----------------------------------------
+<p>Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Syntax highlighted code block
+
+<span class="gh"># Header 1</span>
+<span class="gu">## Header 2</span>
+<span class="gu">### Header 3</span>
+<span class="p">
+-</span> Bulleted
+<span class="p">-</span> List
+<span class="p">
+1.</span> Numbered
+<span class="p">2.</span> List
+
+<span class="gs">**Bold**</span> and _Italic_ and <span class="sb">`Code`</span> text
+
+<span class="p">[</span><span class="nv">Link</span><span class="p">](</span><span class="sx">url</span><span class="p">)</span> and !<span class="p">[</span><span class="nv">Image</span><span class="p">](</span><span class="sx">src</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>For more details see <a href="https://guides.github.com/features/mastering-markdown/">GitHub Flavored Markdown</a>.</p>
+
+<h3 id="jekyll-themes">Jekyll Themes</h3>
+
+<p>Your Pages site will use the layout and styles from the Jekyll theme you have selected in your <a href="https://github.com/ThorMutoAsmund/sbk_vildbjerg/settings">repository settings</a>. The name of this theme is saved in the Jekyll <code class="highlighter-rouge">_config.yml</code> configuration file.</p>
+
+<h3 id="support-or-contact">Support or Contact</h3>
+
