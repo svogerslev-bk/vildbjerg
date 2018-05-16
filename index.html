@@ -55,7 +55,9 @@
 
             <p>Med denne webapp vil vi forsøge at give dig al den information du har brug for mens du er i Vildbjerg. Klik på menu-knappen i toppen for at åben hovedmenuen.</p>
 
-            <div id="nextMatch"><p>Næste kamp er U10-Drenge mod Fjerritslev kl 10:35 på Bane 4</p></div>
+            <div id="nextMatch"><p sbk-next-match="sbk-next-match"></p></div>
+            <div id="todaysMatchesHeader"><p>Resten af dagens kampe</p></div>
+            <div id="todaysMatches"><p sbk-todays-matches="sbk-todays-matches"></p></div>
 
             <ul>
               <li>Se hvilke kampe Svogerslev Boldklub skal spille <a href="kampe.html">her</a> og indmeld resultater.</li>
@@ -86,5 +88,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
   <!-- site specific -->
   <script src="site.js"></script>
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/5.0.2/firebase.js"></script>
+  <script src="firebase.js"></script>
+
 </body>
 </html>

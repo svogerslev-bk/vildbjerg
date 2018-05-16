@@ -184,7 +184,18 @@ ul ul a {
 
 
 #nextMatch {
-  font-size: 18px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  border: 1px solid #666;
+  background-color: white;
+}
+
+#todaysMatchesHeader {
+  text-align: center;
+}
+
+#todaysMatches {
   font-weight: bold;
   text-align: center;
 }
