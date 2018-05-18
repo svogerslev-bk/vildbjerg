@@ -10,26 +10,42 @@ var config = {
 var year = 2008;
 var today = '2018-08-03'
 
-function setdata() {
-  var z, i, elmnt, nextMatchElmnt, todaysMatchesElmnt;
-  /*loop through a collection of all HTML elements:*/
-  z = document.getElementsByTagName("*");
-  for (i = 0; i < z.length; i++) {
-    elmnt = z[i];
-    if (elmnt.getAttribute("sbk-next-match")) {
-      nextMatchElmnt = elmnt;
-    }
-    else if (elmnt.getAttribute("sbk-todays-matches")) {
-      todaysMatchesElmnt = elmnt;
-    }
-  }
-  getMatchInfo(nextMatchElmnt, todaysMatchesElmnt);
-}
+// function setdata() {
+//   var z, i, elmnt, nextMatchElmnt, todaysMatchesElmnt;
+//   /*loop through a collection of all HTML elements:*/
+//   z = document.getElementsByTagName("*");
+//   for (i = 0; i < z.length; i++) {
+//     elmnt = z[i];
+//     if (elmnt.getAttribute("sbk-next-match")) {
+//       nextMatchElmnt = elmnt;
+//     }
+//     else if (elmnt.getAttribute("sbk-todays-matches")) {
+//       todaysMatchesElmnt = elmnt;
+//     }
+//   }
+//   getMatchInfo(nextMatchElmnt, todaysMatchesElmnt);
+// }
 
-function getMatchInfo(nextMatchElmnt, todaysMatchesElmnt) {
+function getMatchInfo() {
   var result = "";  
   var matches = [];
-  firebase.database().ref('/primary/' + year + '/matches').once('value').then(function(snapshot) {
+  firebase.database().ref('/primary/' + year + '/matches').on('value', function(snapshot) {
+    var z, i, elmnt, nextMatchElmnt, todaysMatchesElmnt;
+    /*loop through a collection of all HTML elements:*/
+    z = document.getElementsByTagName("*");
+    for (i = 0; i < z.length; i++) {
+      elmnt = z[i];
+      if (elmnt.getAttribute("sbk-next-match")) {
+        nextMatchElmnt = elmnt;
+      }
+      else if (elmnt.getAttribute("sbk-todays-matches")) {
+        todaysMatchesElmnt = elmnt;
+      }
+    }
+  
+
+    console.log('Got snapshot');
+    nextMatchElmnt.innerHTML = "";
     snapshot.forEach(function(match) {
       var addMatch = false;
       var _class = null;
@@ -89,5 +105,5 @@ function todayRemainingMatches() {
 $(document).ready(function () {
   firebase.initializeApp(config);
   
-  setdata();  
+  getMatchInfo();  
 });
