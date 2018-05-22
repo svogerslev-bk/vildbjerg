@@ -227,6 +227,19 @@ ul ul a {
   border:0;
 }
 
+a.nextMatchLink:link {
+  text-decoration: none;
+}
+
+a.nextMatchLink {
+  color:#222;
+}
+
+a.nextMatchLink:hover,
+a.nextMatchLink:focus {
+  color:#23527c;
+}
+
 .nextMatchScore {
   font-size: 40px;
   float: right;
@@ -244,4 +257,9 @@ ul ul a {
   font-size: 16px;
   font-weight: bold;
   text-align: center;
+}
+
+.reportMatch {
+  margin-top:4px;
+  margin-bottom:4px;
 }
