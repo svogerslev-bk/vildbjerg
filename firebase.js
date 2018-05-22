@@ -110,11 +110,12 @@ function getMatchInfo() {
         nextMatchElmnt.innerHTML += text;
       });
     }
-    
+
     if (todaysMatchesElmnt) {
       todaysMatchesElmnt.innerHTML = '';
       var text = '';
       matches.forEach(function(match) {
+        var opponent = match.team1 == 'SBK' ? match.team2 : match.team1;
         text += match._class + ' mod ' + opponent + ' kl ' + match.startTime + ' (' + match.place + ')</br>';
       });
       todaysMatchesElmnt.innerHTML = text;

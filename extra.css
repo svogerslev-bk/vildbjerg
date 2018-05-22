@@ -202,7 +202,7 @@ ul ul a {
   border: 1px solid #666;
   background-color: white;
   line-height: 1.2;
-  padding: 6px;
+  padding: 0px;
   margin-bottom:6px;
 }
 
@@ -228,7 +228,7 @@ ul ul a {
 }
 
 .nextMatchScore {
-  font-size: 50px;
+  font-size: 46px;
   float: right;
 }
 
