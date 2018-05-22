@@ -29,16 +29,13 @@ var today = '2018-08-03'
 function getMatchInfo() {
   firebase.database().ref('/primary/' + year + '/matches').on('value', function(snapshot) {
     var matches = [];
-    var z, i, elmnt, nextMatchElmnt, nextMatchScoreElmnt, todaysMatchesElmnt;
+    var z, i, elmnt, nextMatchElmnt, todaysMatchesElmnt;
     /*loop through a collection of all HTML elements:*/
     z = document.getElementsByTagName("*");
     for (i = 0; i < z.length; i++) {
       elmnt = z[i];
       if (elmnt.getAttribute("sbk-next-match")) {
         nextMatchElmnt = elmnt;
-      }
-      else if (elmnt.getAttribute("sbk-next-match-score")) {
-        nextMatchScoreElmnt = elmnt;
       }
       else if (elmnt.getAttribute("sbk-todays-matches")) {
         todaysMatchesElmnt = elmnt;
@@ -88,22 +85,30 @@ function getMatchInfo() {
       }
     });
 
-    if (nextMatchElmnt || nextMatchScoreElmnt) {
+    if (nextMatchElmnt) {
       nextMatchElmnt.innerHTML = '';
-      if (matches.length > 0) {
-        var match = matches[0];
+      matches.forEach(match => {
         var opponent = match.team1 == 'SBK' ? match.team2 : match.team1;
-        if (nextMatchScoreElmnt) {
-          var text = 'Næste kamp er ' + match._class + '<br/>' +
-          match.team1 + ' - ' + match.team2 + '<br/>' +
-           ' kl ' + match.startTime + ' på ' + match.place;
-          nextMatchElmnt.innerHTML = text;
-        }
-        if (nextMatchScoreElmnt && match.hasScore) {
-          var text = match.score1 + '-' + match.score2;
-          nextMatchScoreElmnt.innerHTML = text;
-        }
-      }
+        var innerText =  '<div class="_class">' + match._class + '</div>' +
+        '<div class="teams">' + match.team1 + ' - ' + match.team2 + '</div>' +
+        '<div class="whenWhere"> kl ' + match.startTime + ' på ' + match.place + '</div>';
+        var score = match.hasScore ? match.score1 + '-' + match.score2 : '&nbsp; &nbsp; &nbsp; &nbsp;';
+        var text = 
+          '<div class="nextMatch">'+
+          '<table>'+
+            '<tr>'+
+              '<td>'+
+                '<div class="nextMatchText" >'+innerText+'</div>'+
+              '</td>'+
+              '<td style="vertical-align: middle">'+
+                '<div class="nextMatchScore">'+score+'</div>'+
+              '</td>'+
+            '</tr>'+
+          '</table>'+
+        '</div>';
+
+        nextMatchElmnt.innerHTML += text;
+      });
     }
     if (todaysMatchesElmnt) {
       todaysMatchesElmnt.innerHTML = '';
