@@ -228,7 +228,7 @@ ul ul a {
 }
 
 .nextMatchScore {
-  font-size: 46px;
+  font-size: 40px;
   float: right;
 }
 
@@ -237,6 +237,7 @@ ul ul a {
 }
 .matchesHeader {
   text-align: center;
+  margin-top:16px;
 }
 
 #todaysMatches {
