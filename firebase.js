@@ -27,10 +27,9 @@ var today = '2018-08-03'
 // }
 
 function getMatchInfo() {
-  var result = "";  
-  var matches = [];
   firebase.database().ref('/primary/' + year + '/matches').on('value', function(snapshot) {
-    var z, i, elmnt, nextMatchElmnt, todaysMatchesElmnt;
+    var matches = [];
+    var z, i, elmnt, nextMatchElmnt, nextMatchScoreElmnt, todaysMatchesElmnt;
     /*loop through a collection of all HTML elements:*/
     z = document.getElementsByTagName("*");
     for (i = 0; i < z.length; i++) {
@@ -38,14 +37,14 @@ function getMatchInfo() {
       if (elmnt.getAttribute("sbk-next-match")) {
         nextMatchElmnt = elmnt;
       }
+      else if (elmnt.getAttribute("sbk-next-match-score")) {
+        nextMatchScoreElmnt = elmnt;
+      }
       else if (elmnt.getAttribute("sbk-todays-matches")) {
         todaysMatchesElmnt = elmnt;
       }
     }
   
-
-    console.log('Got snapshot');
-    nextMatchElmnt.innerHTML = "";
     snapshot.forEach(function(match) {
       var addMatch = false;
       var _class = null;
@@ -53,6 +52,9 @@ function getMatchInfo() {
       var team2 = null;
       var startTime = null;
       var place = null;
+      var hasScore = false;
+      var score1 = 0;
+      var score2 = 0;
       match.forEach(function(child) {
         if (child.key == 'date' && child.val() == today) {
           addMatch = true;
@@ -72,35 +74,47 @@ function getMatchInfo() {
         else if (child.key == 'class') {
           _class = child.val();
         }
+        else if (child.key == 'score1') {
+          score1 = child.val();
+          hasScore = true;
+        }
+        else if (child.key == 'score2') {
+          score2 = child.val();
+          hasScore = true;
+        }
       });
       if (addMatch) {
-        matches.push({ place, _class, team1, team2, startTime });
+        matches.push({ place, _class, team1, team2, startTime, hasScore, score1, score2 });
       }
     });
 
-    if (nextMatchElmnt) {
+    if (nextMatchElmnt || nextMatchScoreElmnt) {
+      nextMatchElmnt.innerHTML = '';
       if (matches.length > 0) {
         var match = matches[0];
         var opponent = match.team1 == 'SBK' ? match.team2 : match.team1;
-        nextMatchElmnt.innerHTML = 'Næste kamp er ' + match._class + '<br/>' +
+        if (nextMatchScoreElmnt) {
+          var text = 'Næste kamp er ' + match._class + '<br/>' +
           match.team1 + ' - ' + match.team2 + '<br/>' +
            ' kl ' + match.startTime + ' på ' + match.place;
+          nextMatchElmnt.innerHTML = text;
+        }
+        if (nextMatchScoreElmnt && match.hasScore) {
+          var text = match.score1 + '-' + match.score2;
+          nextMatchScoreElmnt.innerHTML = text;
+        }
       }
     }
     if (todaysMatchesElmnt) {
-      var result = '';
+      todaysMatchesElmnt.innerHTML = '';
+      var text = '';
       matches.forEach(function(match) {
-        result += match._class + ' mod ' + opponent + ' kl ' + match.startTime + ' (' + match.place + ')</br>';
+        text += match._class + ' mod ' + opponent + ' kl ' + match.startTime + ' (' + match.place + ')</br>';
       });
-      todaysMatchesElmnt.innerHTML = result;
+      todaysMatchesElmnt.innerHTML = text;
     }
   });
 }
-
-function todayRemainingMatches() {
-
-}
-
 
 $(document).ready(function () {
   firebase.initializeApp(config);

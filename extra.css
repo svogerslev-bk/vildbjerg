@@ -199,13 +199,30 @@ ul ul a {
 #nextMatch {
   font-size: 20px;
   font-weight: bold;
-  text-align: center;
   border: 1px solid #666;
   background-color: white;
   line-height: 1.2;
   padding: 6px;
 }
 
+#nextMatch table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 0px;
+  margin: 0;
+}
+
+#nextMatch table td {
+  border:0;
+}
+
+#nextMatchScore {
+  font-size: 50px;
+}
+
+#nextMatchText {
+  text-align: center;
+}
 #todaysMatchesHeader {
   text-align: center;
 }
