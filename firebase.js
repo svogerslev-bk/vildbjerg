@@ -110,6 +110,7 @@ function getMatchInfo() {
         nextMatchElmnt.innerHTML += text;
       });
     }
+    
     if (todaysMatchesElmnt) {
       todaysMatchesElmnt.innerHTML = '';
       var text = '';
