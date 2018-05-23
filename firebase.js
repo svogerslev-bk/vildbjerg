@@ -101,7 +101,6 @@ function watchMatchInfo() {
         var timeSplit = endTime.split(':').map(function(v) { return v|0});
         endDate = new Date(dateSplit[0],dateSplit[1],dateSplit[2],timeSplit[0],timeSplit[1],0);
         endDateDelayed = new Date(dateSplit[0],dateSplit[1],dateSplit[2],timeSplit[0],timeSplit[1]+30,0);
-        console.log(endDate, endDateDelayed);
       }
       var matchData = { id, date, place, _class, team1, team2, startTime, endTime, hasScore, 
         score1, score2, startDate, startDateDelayed, endDate, endDateDelayed, finalized };
