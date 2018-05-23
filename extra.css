@@ -216,15 +216,40 @@ ul ul a {
   margin-top:6px;
 }
 
-.nextMatch table {
+.nextMatch table,
+.allMatches table {
   width: 100%;
   border-collapse: collapse;
   border: 0px;
   margin: 0;
 }
 
-.nextMatch table td {
+.nextMatch table td,
+.allMatches table td {
   border:0;
+}
+.allMatches table td {
+  padding:0;
+  padding-top:8px;
+}
+
+.allMatches a {
+  text-decoration: none;
+  color:#222;
+}
+
+.allMatches .oneMatch td {
+  padding-bottom: 8px;
+  border-bottom: 1px dotted #aaa;
+}
+
+.allMatches h2 {
+  margin-bottom:0;
+  margin-top:10px;
+}
+
+.allMatches .score {
+  font-size: 26px;
 }
 
 a.nextMatchLink:link {
