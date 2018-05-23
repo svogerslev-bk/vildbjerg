@@ -176,10 +176,10 @@ function watchMatchInfo() {
             var isOngoing = match.startDateDelayed <= timeNow;
 
             if (isOngoing && !match.finalized) {
-              second = '<td style="text-align:right"><button onClick="reportScore('+match.id+','+match.score1+'+1,'+match.score2+')">'+match.team1+' '+match.score1+'</button> &nbsp; <button onClick="reportScore('+match.id+','+match.score1+','+match.score2+'+1)">'+match.team2+' '+match.score2+'</button></td>';
+              second = '<td style="text-align:right"><span style="white-space: nowrap;"><button onClick="reportScore('+match.id+','+match.score1+'+1,'+match.score2+')">'+match.team1+' '+match.score1+'</button> &nbsp; <button onClick="reportScore('+match.id+','+match.score1+','+match.score2+'+1)">'+match.team2+' '+match.score2+'</button></span></td>';
             }
             else if (match.hasScore || match.finalized) {
-              second = '<td style="text-align:right"><div class="score">'+match.score1+'&nbsp;-&nbsp;'+match.score2+'</div></td>';
+              second = '<td style="text-align:right"><div class="score"><span style="white-space: nowrap;">'+match.score1+'&nbsp;-&nbsp;'+match.score2+'</span></div></td>';
             }
 
             matchText += '<tr>'+first+second+'</tr>';
@@ -194,7 +194,7 @@ function watchMatchInfo() {
 }
 
 function reportScore(id, score1, score2) {
-  var result = confirm('Kampens stilling er nu: '+score1+'&nbsp;-&nbsp;'+score2+'. Er det korrekt?');
+  var result = confirm('Kampens stilling er nu: '+score1+' - '+score2+'. Er det korrekt?');
   if (result) {
     firebase.database().ref('/primary/' + year + '/matches/' + id).update({
       score1: score1,
