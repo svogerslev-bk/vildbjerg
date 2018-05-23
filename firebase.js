@@ -176,7 +176,7 @@ function watchMatchInfo() {
             var isOngoing = match.startDateDelayed <= timeNow;
 
             if (isOngoing && !match.finalized) {
-              second = '<td style="text-align:right"><span style="white-space: nowrap;"><button onClick="reportScore('+match.id+','+match.score1+'+1,'+match.score2+')">'+match.team1+' '+match.score1+'</button> &nbsp; <button onClick="reportScore('+match.id+','+match.score1+','+match.score2+'+1)">'+match.team2+' '+match.score2+'</button></span></td>';
+              second = '<td style="text-align:right"><button onClick="reportScore('+match.id+','+match.score1+'+1,'+match.score2+')">'+match.team1+' '+match.score1+'</button> &nbsp; <button onClick="reportScore('+match.id+','+match.score1+','+match.score2+'+1)">'+match.team2+' '+match.score2+'</button></td>';
             }
             else if (match.hasScore || match.finalized) {
               second = '<td style="text-align:right"><div class="score"><span style="white-space: nowrap;">'+match.score1+'&nbsp;-&nbsp;'+match.score2+'</span></div></td>';

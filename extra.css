@@ -252,6 +252,10 @@ ul ul a {
   font-size: 26px;
 }
 
+.allMatches button {
+  margin-top:6px;
+}
+
 a.nextMatchLink:link {
   text-decoration: none;
 }
