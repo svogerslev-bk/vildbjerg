@@ -111,7 +111,7 @@ function watchMatchInfo() {
     });
 
     if (nextMatchElmnt) {
-      nextMatchElmnt.innerHTML = '';
+      var text = '';
       todaysMatches.forEach(function(match) {
         var isOngoing = match.startDateDelayed <= timeNow && match.endDateDelayed >= timeNow;
         if (isOngoing) {
@@ -119,7 +119,7 @@ function watchMatchInfo() {
           '<div class="teams">' + match.team1 + ' - ' + match.team2 + '</div>' +
           '<div class="whenWhere"> kl ' + match.startTime + ' på ' + match.place + '</div>';
           var score = match.hasScore || match.finalized ? match.score1 + '&nbsp;-&nbsp;' + match.score2 : '&nbsp; &nbsp; &nbsp; &nbsp;';
-          var text = 
+          text += 
             '<a class="nextMatchLink" href="kampe.html#' + match.id + '"><div class="nextMatch">'+
             '<table>'+
               '<tr>'+
@@ -132,14 +132,13 @@ function watchMatchInfo() {
               '</tr>'+
             '</table>'+
           '</div></a>';
-
-          nextMatchElmnt.innerHTML += text;
         }
       });
+      nextMatchElmnt.innerHTML = '';
+      nextMatchElmnt.innerHTML = text.length == 0 ? 'Der er ingen kampe i dag' : text;
     }
 
     if (todaysMatchesElmnt) {
-      todaysMatchesElmnt.innerHTML = '';
       var text = '';
       todaysMatches.forEach(function(match) {
         var opponent = match.team1 == 'SBK' ? match.team2 : match.team1;
@@ -148,7 +147,9 @@ function watchMatchInfo() {
           text += '<a href="kampe.html#'+match.id+'">'+ match._class + ' mod ' + opponent + ' kl ' + match.startTime + ' (' + match.place + ')</a></br>';
         }
       });
-      todaysMatchesElmnt.innerHTML = text;
+
+      todaysMatchesElmnt.innerHTML = '';
+      todaysMatchesElmnt.innerHTML = text.length > 0 ? '<div class="matchesHeader">Resten af dagens kampe</div>' + text : '';
     }
 
     if (allMatchesElmnt) {
