@@ -187,7 +187,7 @@ function watchMatchInfo() {
         });
         text += matchText;
       })
-      text = '<table>' + text + '</table>';
+      text = text.length == 0 ? '<p>Der er ikke registreret nogen kampe endnu' : '<table>' + text + '</table>';
       allMatchesElmnt.innerHTML = text;
     }
   });
