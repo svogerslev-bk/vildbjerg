@@ -7,7 +7,7 @@ var config = {
   messagingSenderId: "575906605246"
 };
 
-var year = 2008;
+var year = 2018;
 var todayString = '2018-08-03'
 var timeNow = new Date(2018,8,3,11,10,0);
 var nextMatchElmnt, allMatchesElmnt, todaysMatchesElmnt;
