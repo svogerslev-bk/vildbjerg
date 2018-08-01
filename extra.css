@@ -241,14 +241,14 @@ table {
   padding-top:8px;
 }
 
-.allMatches a {
-  text-decoration: none;
-  color:#222;
-}
+
 
 .allMatches .oneMatch td {
   padding-bottom: 8px;
   border-bottom: 1px dotted #aaa;
+}
+.allMatches .oneMatch-nodots td {
+  padding-bottom: 8px;
 }
 
 .allMatches h2 {
