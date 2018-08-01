@@ -41,7 +41,6 @@ function watchMatchInfo() {
       var team1 = null;
       var team2 = null;
       var startTime = null;
-      var endTime = null;
       var place = null;
       var hasScore = false;
       var score1 = 0;
@@ -61,9 +60,6 @@ function watchMatchInfo() {
         }
         else if (child.key == 'start-time') {
           startTime = child.val();
-        }
-        else if (child.key == 'end-time') {
-          endTime = child.val();
         }
         else if (child.key == 'team1') {
           team1 = child.val();
@@ -88,22 +84,17 @@ function watchMatchInfo() {
       });
       var startDate = null;
       var startDateDelayed = null;
-      var endDate = null;
       var endDateDelayed = null;
       if (date && startTime) {
         var dateSplit = date.split('-').map(function(v) { return v|0});
         var timeSplit = startTime.split(':').map(function(v) { return v|0});
         startDate = new Date(dateSplit[0],dateSplit[1],dateSplit[2],timeSplit[0],timeSplit[1],0);
         startDateDelayed = new Date(dateSplit[0],dateSplit[1],dateSplit[2],timeSplit[0],timeSplit[1]-10,0);
-      }
-      if (date && endTime) {
-        var dateSplit = date.split('-').map(function(v) { return v|0});
-        var timeSplit = endTime.split(':').map(function(v) { return v|0});
         endDate = new Date(dateSplit[0],dateSplit[1],dateSplit[2],timeSplit[0],timeSplit[1],0);
-        endDateDelayed = new Date(dateSplit[0],dateSplit[1],dateSplit[2],timeSplit[0],timeSplit[1]+30,0);
+        endDateDelayed = new Date(dateSplit[0],dateSplit[1],dateSplit[2],timeSplit[0],timeSplit[1]+60,0);
       }
-      var matchData = { id, date, place, _class, team1, team2, startTime, endTime, hasScore, 
-        score1, score2, startDate, startDateDelayed, endDate, endDateDelayed, finalized };
+      var matchData = { id, date, place, _class, team1, team2, startTime, hasScore, 
+        score1, score2, startDate, startDateDelayed, endDateDelayed, finalized };
       matches.push(matchData);
       if (isTodaysMatch) {
         todaysMatches.push(matchData);
@@ -170,7 +161,7 @@ function watchMatchInfo() {
         matches.forEach(function(match) {
           if (match.date == date) {
             var first = '<tr class="oneMatch"><td><a id="'+match.id+'"><strong>' + match._class + '</strong></a>, ' + 
-            match.team1 +' mod ' + match.team2 + ' kl ' + match.startTime + '-' + match.endTime + ' (' + match.place + ')</td>';
+            match.team1 +' mod ' + match.team2 + ' kl ' + match.startTime + ' (' + match.place + ')</td>';
 
             var second = '';
             var isOngoing = match.startDateDelayed <= timeNow;
