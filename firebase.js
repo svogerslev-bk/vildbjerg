@@ -164,7 +164,7 @@ function watchMatchInfo() {
         var matchText = "";
         matches.forEach(function(match) {
           if (match.date == date) {
-            var first = '<tr class="oneMatch"><td><a name="'+match.id+'" id="'+match.id+'"><strong>' + match._class + '</strong></a>, ' + 
+            var first = '<td><a name="'+match.id+'" id="'+match.id+'"><strong>' + match._class + '</strong></a>, ' + 
             match.team1 +' mod ' + match.team2 + ' kl ' + match.startTime + ' (bane ' + match.place + ')</td>';
 
             var second = '';
@@ -181,7 +181,7 @@ function watchMatchInfo() {
               second = '<td></td>';
             }
 
-            matchText += '<tr>'+first+second+'</tr>';
+            matchText += '<tr class="oneMatch">'+first+second+'</tr>';
           }
         });
         text += matchText;
