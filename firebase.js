@@ -168,11 +168,12 @@ function watchMatchInfo() {
             match.team1 +' mod ' + match.team2 + ' kl ' + match.startTime + ' (bane ' + match.place + ')</td>';
 
             var second = '';
+            var third = '';
             var isOngoing = match.startDateDelayed <= timeNow;
-            console.log("D", match.startDateDelayed, timeNow)
 
             if (isOngoing && !match.finalized) {
-              second = '<td style="text-align:right"><button onClick="reportScore('+match.id+','+match.score1+'+1,'+match.score2+')">'+match.team1+' '+match.score1+'</button> &nbsp; <button onClick="reportScore('+match.id+','+match.score1+','+match.score2+'+1)">'+match.team2+' '+match.score2+'</button></td>';
+              second = '<td></td>';
+              third = '<td colspan="2" style="text-align:right"><button onClick="reportScore('+match.id+','+match.score1+'+1,'+match.score2+')">'+match.team1+' '+match.score1+'</button> &nbsp; <button onClick="reportScore('+match.id+','+match.score1+','+match.score2+'+1)">'+match.team2+' '+match.score2+'</button></td>';
             }
             else if (match.hasScore || match.finalized) {
               second = '<td style="text-align:right"><div class="score"><span style="white-space: nowrap;">'+match.score1+'&nbsp;-&nbsp;'+match.score2+'</span></div></td>';
@@ -181,7 +182,13 @@ function watchMatchInfo() {
               second = '<td></td>';
             }
 
-            matchText += '<tr class="oneMatch">'+first+second+'</tr>';
+            if (third != '') {
+              matchText += '<tr class="oneMatch-nodots">'+first+second+'</tr>';
+              matchText += '<tr class="oneMatch">'+third+'</tr>';
+            }
+            else {
+              matchText += '<tr class="oneMatch">'+first+second+'</tr>';
+            }
           }
         });
         text += matchText;
