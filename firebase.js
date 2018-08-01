@@ -188,7 +188,12 @@ function watchMatchInfo() {
 
           if ((isOngoing && !match.finalized) || adminElmnt) {
             second = '<td></td>';
-            third = '<td colspan="2" style="text-align:right"><button onClick="reportScore('+match.id+','+match.score1+'+1,'+match.score2+')">'+match.team1+' '+match.score1+'</button> &nbsp; <button onClick="reportScore('+match.id+','+match.score1+','+match.score2+'+1)">'+match.team2+' '+match.score2+'</button></td>';
+            if (adminElmnt) {
+              third = '<td colspan="2" style="text-align:right"><button onClick="reportScore('+match.id+','+match.score1+'+1,'+match.score2+')">'+match.team1+' '+match.score1+'</button> &nbsp; <button onClick="reportScore('+match.id+','+match.score1+'-1,'+match.score2+')">-</button> &nbsp; <button onClick="reportScore('+match.id+','+match.score1+','+match.score2+'+1)">'+match.team2+' '+match.score2+'</button> &nbsp; <button onClick="reportScore('+match.id+','+match.score1+','+match.score2+'-1)">-</button> &nbsp; <button onClick="finalizeScore('+match.id+', true)">Fin</button> &nbsp; <button onClick="finalizeScore('+match.id+', false)">Act</button></td>';
+            }
+            else {
+              third = '<td colspan="2" style="text-align:right"><button onClick="reportScore('+match.id+','+match.score1+'+1,'+match.score2+')">'+match.team1+' '+match.score1+'</button> &nbsp; <button onClick="reportScore('+match.id+','+match.score1+','+match.score2+'+1)">'+match.team2+' '+match.score2+'</button></td>';
+            }
           }
           else if (match.hasScore || match.finalized) {
             second = '<td style="text-align:right"><div class="score"><span style="white-space: nowrap;">'+match.score1+'&nbsp;-&nbsp;'+match.score2+'</span></div></td>';
@@ -220,10 +225,33 @@ function watchMatchInfo() {
 function reportScore(id, score1, score2) {
   var result = confirm('Kampens stilling er nu: '+score1+' - '+score2+'. Er det korrekt?');
   if (result) {
+    if (score1 == 0 && score2 == 0) {
+      score1 = null;
+      score2 = null;
+    }
     firebase.database().ref('/primary/' + year + '/matches/' + id).update({
       score1: score1,
       score2: score2
     });
+  }
+}
+
+function finalizeScore(id, final) {
+  if (final) {
+    var result = confirm('Kampen vil blive finalized. Er det korrekt?');
+    if (result) {
+      firebase.database().ref('/primary/' + year + '/matches/' + id).update({
+        finalized: true
+      });
+    }
+  }
+  else {
+    var result = confirm('Kampen vil blive activated. Er det korrekt?');
+    if (result) {
+      firebase.database().ref('/primary/' + year + '/matches/' + id).update({
+        finalized: false
+      });
+    }
   }
 }
 
