@@ -7,16 +7,14 @@ var config = {
   messagingSenderId: "575906605246"
 };
 
-var year = 2018;
-var todayString = '2018-08-01'
-var timeNow = new Date();//2018,8,3,11,10,0);
+var timeNow = new Date();
 var timeNow_month = '' + (timeNow.getMonth() + 1),
   timeNow_day = '' + timeNow.getDate(),
   timeNow_year = timeNow.getFullYear();
 if (timeNow_month.length < 2) timeNow_month = '0' + timeNow_month;
 if (timeNow_day.length < 2) timeNow_day = '0' + timeNow_day;
-var todayString = timeNow_year+'-'+timeNow_month+'-'+timeNow_day ;
-console.log(timeNow, todayString)
+var year = timeNow_year;
+var todayString = timeNow_year+'-'+timeNow_month+'-'+timeNow_day;
 var nextMatchElmnt, allMatchesElmnt, todaysMatchesElmnt;
 
 function findElements() {
@@ -95,9 +93,9 @@ function watchMatchInfo() {
       if (date && startTime) {
         var dateSplit = date.split('-').map(function(v) { return v|0});
         var timeSplit = startTime.split(':').map(function(v) { return v|0});
-        startDate = new Date(dateSplit[0],dateSplit[1],dateSplit[2],timeSplit[0],timeSplit[1],0);
-        startDateDelayed = new Date(dateSplit[0],dateSplit[1],dateSplit[2],timeSplit[0],timeSplit[1]-10,0);
-        endDateDelayed = new Date(dateSplit[0],dateSplit[1],dateSplit[2],timeSplit[0],timeSplit[1]+60,0);
+        startDate = new Date(dateSplit[0],dateSplit[1]-1,dateSplit[2],timeSplit[0],timeSplit[1],0);
+        startDateDelayed = new Date(dateSplit[0],dateSplit[1]-1,dateSplit[2],timeSplit[0],timeSplit[1]-10,0);
+        endDateDelayed = new Date(dateSplit[0],dateSplit[1]-1,dateSplit[2],timeSplit[0],timeSplit[1]+60,0);
       }
       var matchData = { id, date, place, _class, team1, team2, startTime, hasScore, 
         score1, score2, startDate, startDateDelayed, endDateDelayed, finalized };
