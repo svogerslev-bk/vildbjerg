@@ -169,7 +169,7 @@ function watchMatchInfo() {
           }
         });
         matchesToShow.sort(function(a, b){
-          return (a.startTime < b.startTime ? -1 : (a.startTime > b.startTime ? 1 : 0));
+          return (a.startDate < b.startDate ? -1 : (a.startDate > b.startDate ? 1 : 0));
         });
         matchesToShow.forEach(function(match) {
           var first = '<td><a name="'+match.id+'" id="'+match.id+'">' + match.startTime +'&nbsp;&nbsp; <strong>' + match._class + '</strong></a>, ' + 
