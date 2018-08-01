@@ -118,7 +118,7 @@ function watchMatchInfo() {
           '<div class="whenWhere"> kl ' + match.startTime + ' på <a href="baner_stor.png">bane ' + match.place + '</a></div>';
           var score = match.hasScore || match.finalized ? match.score1 + '&nbsp;-&nbsp;' + match.score2 : '&nbsp; &nbsp; &nbsp; &nbsp;';
           text += 
-            '<a class="nextMatchLink" href="kampe.html#' + match.id + '"><div class="nextMatch">'+
+            '<a class="nextMatchLink" href="kampe.html#m' + match.id + '"><div class="nextMatch">'+
             '<table>'+
               '<tr>'+
                 '<td>'+
@@ -142,7 +142,7 @@ function watchMatchInfo() {
         var opponent = match.team1 == 'SBK' ? match.team2 : match.team1;
         var isOngoing = match.startDateDelayed <= timeNow;
         if (!isOngoing) {
-          text += '<a href="kampe.html#'+match.id+'">'+ match._class + ' <i>mod</i> ' + opponent + ' kl ' + match.startTime + ' (<a href="baner_stor.png">bane ' + match.place + '</bane>)</a></br>';
+          text += '<a href="kampe.html#m'+match.id+'">'+ match._class + ' <em>mod</em> ' + opponent + ' kl ' + match.startTime + ' (<a href="baner_stor.png">bane ' + match.place + '</bane>)</a></br>';
         }
       });
 
@@ -179,8 +179,8 @@ function watchMatchInfo() {
           return (a.startDate < b.startDate ? -1 : (a.startDate > b.startDate ? 1 : 0));
         });
         matchesToShow.forEach(function(match) {
-          var first = '<td><a name="'+match.id+'" id="'+match.id+'">' + match.startTime +'&nbsp;&nbsp; <strong>' + match._class + '</strong></a>, ' + 
-          match.team1 +' <i>mod</i> ' + match.team2 + ' (<a href="baner_stor.png">bane ' + match.place + '</a>)</td>';
+          var first = '<td id="m'+match.id+'">' + match.startTime +'&nbsp;&nbsp; <strong>' + match._class + '</strong>, ' + 
+          match.team1 +' <em>mod</em> ' + match.team2 + ' (<a href="baner_stor.png">bane ' + match.place + '</a>)</td>';
 
           var second = '';
           var third = '';
