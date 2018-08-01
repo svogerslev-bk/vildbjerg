@@ -108,7 +108,7 @@ function watchMatchInfo() {
         if (isOngoing) {
           var innerText =  '<div class="_class">' + match._class + '</div>' +
           '<div class="teams">' + match.team1 + ' - ' + match.team2 + '</div>' +
-          '<div class="whenWhere"> kl ' + match.startTime + ' på ' + match.place + '</div>';
+          '<div class="whenWhere"> kl ' + match.startTime + ' på bane ' + match.place + '</div>';
           var score = match.hasScore || match.finalized ? match.score1 + '&nbsp;-&nbsp;' + match.score2 : '&nbsp; &nbsp; &nbsp; &nbsp;';
           text += 
             '<a class="nextMatchLink" href="kampe.html#' + match.id + '"><div class="nextMatch">'+
@@ -135,7 +135,7 @@ function watchMatchInfo() {
         var opponent = match.team1 == 'SBK' ? match.team2 : match.team1;
         var isOngoing = match.startDateDelayed <= timeNow;
         if (!isOngoing) {
-          text += '<a href="kampe.html#'+match.id+'">'+ match._class + ' mod ' + opponent + ' kl ' + match.startTime + ' (' + match.place + ')</a></br>';
+          text += '<a href="kampe.html#'+match.id+'">'+ match._class + ' mod ' + opponent + ' kl ' + match.startTime + ' (bane ' + match.place + ')</a></br>';
         }
       });
 
@@ -161,7 +161,7 @@ function watchMatchInfo() {
         matches.forEach(function(match) {
           if (match.date == date) {
             var first = '<tr class="oneMatch"><td><a id="'+match.id+'"><strong>' + match._class + '</strong></a>, ' + 
-            match.team1 +' mod ' + match.team2 + ' kl ' + match.startTime + ' (' + match.place + ')</td>';
+            match.team1 +' mod ' + match.team2 + ' kl ' + match.startTime + ' (bane ' + match.place + ')</td>';
 
             var second = '';
             var isOngoing = match.startDateDelayed <= timeNow;
