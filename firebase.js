@@ -173,6 +173,9 @@ function watchMatchInfo() {
             else if (match.hasScore || match.finalized) {
               second = '<td style="text-align:right"><div class="score"><span style="white-space: nowrap;">'+match.score1+'&nbsp;-&nbsp;'+match.score2+'</span></div></td>';
             }
+            else {
+              second = '<td></td>';
+            }
 
             matchText += '<tr>'+first+second+'</tr>';
           }
