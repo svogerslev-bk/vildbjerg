@@ -172,8 +172,8 @@ function watchMatchInfo() {
           return (a.startTime < b.startTime ? -1 : (a.startTime > b.startTime ? 1 : 0));
         });
         matchesToShow.forEach(function(match) {
-          var first = '<td><a name="'+match.id+'" id="'+match.id+'"><strong>' + match._class + '</strong></a>, ' + 
-          match.team1 +' mod ' + match.team2 + ' kl ' + match.startTime + ' (bane ' + match.place + ')</td>';
+          var first = '<td><a name="'+match.id+'" id="'+match.id+'">' + match.startTime +' <strong>' + match._class + '</strong></a>, ' + 
+          match.team1 +' mod ' + match.team2 + ' (bane ' + match.place + ')</td>';
 
           var second = '';
           var third = '';
