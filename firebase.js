@@ -15,7 +15,7 @@ if (timeNow_month.length < 2) timeNow_month = '0' + timeNow_month;
 if (timeNow_day.length < 2) timeNow_day = '0' + timeNow_day;
 var year = timeNow_year;
 var todayString = timeNow_year+'-'+timeNow_month+'-'+timeNow_day;
-var nextMatchElmnt, allMatchesElmnt, todaysMatchesElmnt;
+var nextMatchElmnt, todaysMatchesElmnt, allMatchesElmnt, adminElmnt;
 
 function findElements() {
   var z, i, elmnt;
@@ -31,6 +31,9 @@ function findElements() {
     }
     else if (elmnt.getAttribute("sbk-all-matches")) {
       allMatchesElmnt = elmnt;
+    }
+    else if (elmnt.getAttribute("sbk-admin")) {
+      adminElmnt = elmnt;
     }
   }
 }
@@ -147,8 +150,12 @@ function watchMatchInfo() {
       todaysMatchesElmnt.innerHTML = text.length > 0 ? '<div class="matchesHeader">Resten af dagens kampe</div>' + text : '';
     }
 
-    if (allMatchesElmnt) {
-      allMatchesElmnt.innerHTML = '';
+    if (allMatchesElmnt || adminElmnt) {
+      if (adminElmnt)
+        adminElmnt.innerHTML = '';
+      else
+        allMatchesElmnt.innerHTML = '';
+
       // get datest
       var allDates = [];
       matches.forEach(function (match) {
@@ -179,7 +186,7 @@ function watchMatchInfo() {
           var third = '';
           var isOngoing = match.startDateDelayed <= timeNow;
 
-          if (isOngoing && !match.finalized) {
+          if ((isOngoing && !match.finalized) || adminElmnt) {
             second = '<td></td>';
             third = '<td colspan="2" style="text-align:right"><button onClick="reportScore('+match.id+','+match.score1+'+1,'+match.score2+')">'+match.team1+' '+match.score1+'</button> &nbsp; <button onClick="reportScore('+match.id+','+match.score1+','+match.score2+'+1)">'+match.team2+' '+match.score2+'</button></td>';
           }
@@ -201,7 +208,11 @@ function watchMatchInfo() {
         text += matchText;
       })
       text = text.length == 0 ? '<p>Der er ikke registreret nogen kampe endnu' : '<table>' + text + '</table>';
-      allMatchesElmnt.innerHTML = text;
+
+      if (adminElmnt)
+        adminElmnt.innerHTML = text;
+      else
+        allMatchesElmnt.innerHTML = text;
     }
   });
 }
