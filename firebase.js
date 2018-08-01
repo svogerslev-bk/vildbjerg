@@ -8,8 +8,9 @@ var config = {
 };
 
 var year = 2018;
-var todayString = '2018-08-03'
-var timeNow = new Date(2018,8,3,11,10,0);
+var todayString = '2018-08-01'
+var timeNow = new Date();//2018,8,3,11,10,0);
+console.log(timeNow)
 var nextMatchElmnt, allMatchesElmnt, todaysMatchesElmnt;
 
 function findElements() {
