@@ -139,7 +139,7 @@ function watchMatchInfo() {
         var opponent = match.team1 == 'SBK' ? match.team2 : match.team1;
         var isOngoing = match.startDateDelayed <= timeNow;
         if (!isOngoing) {
-          text += '<a href="kampe.html#'+match.id+'">'+ match._class + ' mod ' + opponent + ' kl ' + match.startTime + ' (bane ' + match.place + ')</a></br>';
+          text += '<a href="kampe.html#'+match.id+'">'+ match._class + ' <i>mod</i> ' + opponent + ' kl ' + match.startTime + ' (bane ' + match.place + ')</a></br>';
         }
       });
 
@@ -173,7 +173,7 @@ function watchMatchInfo() {
         });
         matchesToShow.forEach(function(match) {
           var first = '<td><a name="'+match.id+'" id="'+match.id+'">' + match.startTime +' <strong>' + match._class + '</strong></a>, ' + 
-          match.team1 +' mod ' + match.team2 + ' (bane ' + match.place + ')</td>';
+          match.team1 +' <i>mod</i> ' + match.team2 + ' (bane ' + match.place + ')</td>';
 
           var second = '';
           var third = '';
