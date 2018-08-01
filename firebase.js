@@ -162,33 +162,40 @@ function watchMatchInfo() {
       allDates.forEach(function(date) {
         text += '<tr><td colspan="2"><h2>'+date+'</h2></td></tr>';
         var matchText = "";
+        var matchesToShow = [];
         matches.forEach(function(match) {
           if (match.date == date) {
-            var first = '<td><a name="'+match.id+'" id="'+match.id+'"><strong>' + match._class + '</strong></a>, ' + 
-            match.team1 +' mod ' + match.team2 + ' kl ' + match.startTime + ' (bane ' + match.place + ')</td>';
+            matchesToShow.push(match);
+          }
+        });
+        matchesToShow.sort(function(a, b){
+          return (a.startTime < b.startTime ? -1 : (a.startTime > b.startTime ? 1 : 0));
+        });
+        matchesToShow.forEach(function(match) {
+          var first = '<td><a name="'+match.id+'" id="'+match.id+'"><strong>' + match._class + '</strong></a>, ' + 
+          match.team1 +' mod ' + match.team2 + ' kl ' + match.startTime + ' (bane ' + match.place + ')</td>';
 
-            var second = '';
-            var third = '';
-            var isOngoing = match.startDateDelayed <= timeNow;
+          var second = '';
+          var third = '';
+          var isOngoing = match.startDateDelayed <= timeNow;
 
-            if (isOngoing && !match.finalized) {
-              second = '<td></td>';
-              third = '<td colspan="2" style="text-align:right"><button onClick="reportScore('+match.id+','+match.score1+'+1,'+match.score2+')">'+match.team1+' '+match.score1+'</button> &nbsp; <button onClick="reportScore('+match.id+','+match.score1+','+match.score2+'+1)">'+match.team2+' '+match.score2+'</button></td>';
-            }
-            else if (match.hasScore || match.finalized) {
-              second = '<td style="text-align:right"><div class="score"><span style="white-space: nowrap;">'+match.score1+'&nbsp;-&nbsp;'+match.score2+'</span></div></td>';
-            }
-            else {
-              second = '<td></td>';
-            }
+          if (isOngoing && !match.finalized) {
+            second = '<td></td>';
+            third = '<td colspan="2" style="text-align:right"><button onClick="reportScore('+match.id+','+match.score1+'+1,'+match.score2+')">'+match.team1+' '+match.score1+'</button> &nbsp; <button onClick="reportScore('+match.id+','+match.score1+','+match.score2+'+1)">'+match.team2+' '+match.score2+'</button></td>';
+          }
+          else if (match.hasScore || match.finalized) {
+            second = '<td style="text-align:right"><div class="score"><span style="white-space: nowrap;">'+match.score1+'&nbsp;-&nbsp;'+match.score2+'</span></div></td>';
+          }
+          else {
+            second = '<td></td>';
+          }
 
-            if (third != '') {
-              matchText += '<tr class="oneMatch-nodots">'+first+second+'</tr>';
-              matchText += '<tr class="oneMatch">'+third+'</tr>';
-            }
-            else {
-              matchText += '<tr class="oneMatch">'+first+second+'</tr>';
-            }
+          if (third != '') {
+            matchText += '<tr class="oneMatch-nodots">'+first+second+'</tr>';
+            matchText += '<tr class="oneMatch">'+third+'</tr>';
+          }
+          else {
+            matchText += '<tr class="oneMatch">'+first+second+'</tr>';
           }
         });
         text += matchText;
