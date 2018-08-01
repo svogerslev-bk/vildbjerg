@@ -91,7 +91,6 @@ function watchMatchInfo() {
         var timeSplit = startTime.split(':').map(function(v) { return v|0});
         startDate = new Date(dateSplit[0],dateSplit[1],dateSplit[2],timeSplit[0],timeSplit[1],0);
         startDateDelayed = new Date(dateSplit[0],dateSplit[1],dateSplit[2],timeSplit[0],timeSplit[1]-10,0);
-        endDate = new Date(dateSplit[0],dateSplit[1],dateSplit[2],timeSplit[0],timeSplit[1],0);
         endDateDelayed = new Date(dateSplit[0],dateSplit[1],dateSplit[2],timeSplit[0],timeSplit[1]+60,0);
       }
       var matchData = { id, date, place, _class, team1, team2, startTime, hasScore, 
@@ -166,6 +165,7 @@ function watchMatchInfo() {
 
             var second = '';
             var isOngoing = match.startDateDelayed <= timeNow;
+            console.log("D", match.startDateDelayed, timeNow)
 
             if (isOngoing && !match.finalized) {
               second = '<td style="text-align:right"><button onClick="reportScore('+match.id+','+match.score1+'+1,'+match.score2+')">'+match.team1+' '+match.score1+'</button> &nbsp; <button onClick="reportScore('+match.id+','+match.score1+','+match.score2+'+1)">'+match.team2+' '+match.score2+'</button></td>';
