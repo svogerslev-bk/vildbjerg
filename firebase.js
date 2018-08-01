@@ -10,7 +10,13 @@ var config = {
 var year = 2018;
 var todayString = '2018-08-01'
 var timeNow = new Date();//2018,8,3,11,10,0);
-console.log(timeNow)
+var timeNow_month = '' + (timeNow.getMonth() + 1),
+  timeNow_day = '' + timeNow.getDate(),
+  timeNow_year = timeNow.getFullYear();
+if (timeNow_month.length < 2) timeNow_month = '0' + timeNow_month;
+if (timeNow_day.length < 2) timeNow_day = '0' + timeNow_day;
+var todayString = timeNow_year+'-'+timeNow_month+'-'+timeNow_day ;
+console.log(timeNow, todayString)
 var nextMatchElmnt, allMatchesElmnt, todaysMatchesElmnt;
 
 function findElements() {
