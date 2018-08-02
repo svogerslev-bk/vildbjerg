@@ -133,7 +133,7 @@ function watchMatchInfo() {
         }
       });
       nextMatchElmnt.innerHTML = '';
-      nextMatchElmnt.innerHTML = text.length == 0 ? 'Der er ingen kampe i dag' : text;
+      nextMatchElmnt.innerHTML = text.length == 0 ? 'Der er ingen kampe igang' : text;
     }
 
     if (todaysMatchesElmnt) {
