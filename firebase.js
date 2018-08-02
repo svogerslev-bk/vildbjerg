@@ -15,7 +15,7 @@ if (timeNow_month.length < 2) timeNow_month = '0' + timeNow_month;
 if (timeNow_day.length < 2) timeNow_day = '0' + timeNow_day;
 var year = timeNow_year;
 var todayString = timeNow_year+'-'+timeNow_month+'-'+timeNow_day;
-var nextMatchElmnt, todaysMatchesElmnt, allMatchesElmnt, adminElmnt;
+var nextMatchElmnt, todaysMatchesElmnt, todaysMatchesTvElmnt, allMatchesElmnt, adminElmnt;
 
 function findElements() {
   var z, i, elmnt;
@@ -28,6 +28,9 @@ function findElements() {
     }
     else if (elmnt.getAttribute("sbk-todays-matches")) {
       todaysMatchesElmnt = elmnt;
+    }
+    else if (elmnt.getAttribute("sbk-todays-matches-tv")) {
+      todaysMatchesTvElmnt = elmnt;
     }
     else if (elmnt.getAttribute("sbk-all-matches")) {
       allMatchesElmnt = elmnt;
@@ -90,6 +93,13 @@ function watchMatchInfo() {
           hasScore = true;
         }
       });
+      if (team2 == 'SBK') {
+        team2 = team1;
+        team1 = 'SBK';
+        var sctemp = score2;
+        score2 = score1;
+        score1 = sctemp;
+      }
       var startDate = null;
       var startDateDelayed = null;
       var endDateDelayed = null;
@@ -140,7 +150,7 @@ function watchMatchInfo() {
         }
       });
       nextMatchElmnt.innerHTML = '';
-      nextMatchElmnt.innerHTML = text.length == 0 ? 'Der er ingen kampe igang' : text;
+      nextMatchElmnt.innerHTML = text.length == 0 ? '' : text;
     }
 
     if (todaysMatchesElmnt) {
@@ -158,6 +168,29 @@ function watchMatchInfo() {
       todaysMatchesElmnt.innerHTML = '';
       todaysMatchesElmnt.innerHTML = text.length > 0 ? text : '';
     }
+
+    if (todaysMatchesTvElmnt) {
+      var text = '';
+      todaysMatches.forEach(function(match) {
+        var first = '<td id="m'+match.id+'">' + match.startTime +'&nbsp;&nbsp; <strong>' + match._class + '</strong>, ' + 
+        match.team1 +' <em>mod</em> ' + match.team2 + ' (<a href="baner_stor.png">bane ' + match.place + '</a>)</td>';
+
+        var second = '';
+
+        if (match.hasScore || match.finalized) {
+          second = '<td style="text-align:right"><div class="score"><span style="white-space: nowrap;">'+match.score1+'&nbsp;-&nbsp;'+match.score2+'</span></div></td>';
+        }
+        else {
+          second = '<td></td>';
+        }
+
+        text += '<tr class="oneMatch">'+first+second+'</tr>';
+      });
+
+      todaysMatchesTvElmnt.innerHTML = '';
+      todaysMatchesTvElmnt.innerHTML = text.length > 0 ? '<table>' + text + '</table>' : '';
+    }
+    
 
     if (allMatchesElmnt || adminElmnt) {
       if (adminElmnt)

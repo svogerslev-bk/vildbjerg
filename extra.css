@@ -212,6 +212,7 @@ table {
   line-height: 1.2;
   padding: 0px;
   margin-bottom:6px;
+  max-width: 600px;
 }
 
 .nextMatch ._class {
@@ -232,18 +233,29 @@ table {
   margin: 0;
 }
 
+.todaysMatchesTv table {
+  border-collapse: collapse;
+  border: 0px;
+  margin: 0;
+}
+
+
 .nextMatch table td,
-.allMatches table td {
+.allMatches table td,
+.todaysMatchesTv td {
   border:0;
 }
-.allMatches table td {
+.allMatches table td,
+.todaysMatchesTv td {
   padding:0;
+  padding-right:10px;  
   padding-top:8px;
 }
 
 
 
-.allMatches .oneMatch td {
+.allMatches .oneMatch td,
+.todaysMatchesTv .oneMatch td {
   padding-bottom: 8px;
   border-bottom: 1px dotted #aaa;
 }
@@ -256,7 +268,8 @@ table {
   margin-top:10px;
 }
 
-.allMatches .score {
+.allMatches .score,
+.todaysMatchesTv .score {
   font-size: 26px;
 }
 
