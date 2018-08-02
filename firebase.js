@@ -93,13 +93,6 @@ function watchMatchInfo() {
           hasScore = true;
         }
       });
-      if (team2 == 'SBK') {
-        team2 = team1;
-        team1 = 'SBK';
-        var sctemp = score2;
-        score2 = score1;
-        score1 = sctemp;
-      }
       var startDate = null;
       var startDateDelayed = null;
       var endDateDelayed = null;
@@ -228,10 +221,20 @@ function watchMatchInfo() {
           if ((isOngoing && !match.finalized) || adminElmnt) {
             second = '<td></td>';
             if (adminElmnt) {
-              third = '<td colspan="2" style="text-align:right"><button onClick="reportScore('+match.id+','+match.score1+'+1,'+match.score2+')">'+match.team1+' '+match.score1+'</button> &nbsp; <button onClick="reportScore('+match.id+','+match.score1+'-1,'+match.score2+')">-</button> &nbsp; <button onClick="reportScore('+match.id+','+match.score1+','+match.score2+'+1)">'+match.team2+' '+match.score2+'</button> &nbsp; <button onClick="reportScore('+match.id+','+match.score1+','+match.score2+'-1)">-</button> &nbsp; <button onClick="finalizeScore('+match.id+', true)">Fin</button> &nbsp; <button onClick="finalizeScore('+match.id+', false)">Act</button></td>';
+              third = '<td colspan="2" style="text-align:right">'+
+              '<button onClick="reportScore('+match.id+','+match.score1+'+1,'+match.score2+')">'+match.team1+' '+match.score1+'</button>'+
+              ' &nbsp; <button onClick="reportScore('+match.id+','+match.score1+'-1,'+match.score2+')">-</button>'+
+              ' &nbsp; <button onClick="reportScore('+match.id+','+match.score1+','+match.score2+'+1)">'+match.team2+' '+match.score2+'</button>'+
+              ' &nbsp; <button onClick="reportScore('+match.id+','+match.score1+','+match.score2+'-1)">-</button>'+
+              ' &nbsp; <button onClick="finalizeScore('+match.id+', true)">Fin</button>'+
+              ' &nbsp; <button onClick="finalizeScore('+match.id+', false)">Act</button></td>';
             }
             else {
-              third = '<td colspan="2" style="text-align:right"><button onClick="reportScore('+match.id+','+match.score1+'+1,'+match.score2+')">'+match.team1+' '+match.score1+'</button> &nbsp; <button onClick="reportScore('+match.id+','+match.score1+'-1,'+match.score2+')">-</button> &nbsp; <button onClick="reportScore('+match.id+','+match.score1+','+match.score2+'+1)">'+match.team2+' '+match.score2+'</button> &nbsp; <button onClick="reportScore('+match.id+','+match.score1+','+match.score2+'-1)">-</button></td>';
+              third = '<td colspan="2" style="text-align:right">'+
+              '<button onClick="reportScore('+match.id+','+match.score1+'+1,'+match.score2+')">'+match.team1+' '+match.score1+'</button>'+
+              ' &nbsp; <button onClick="reportScore('+match.id+','+match.score1+'-1,'+match.score2+')">-</button>'+
+              ' &nbsp; <button onClick="reportScore('+match.id+','+match.score1+','+match.score2+'+1)">'+match.team2+' '+match.score2+'</button>'+
+              ' &nbsp; <button onClick="reportScore('+match.id+','+match.score1+','+match.score2+'-1)">-</button></td>';
             }
           }
           else if (match.hasScore || match.finalized) {
