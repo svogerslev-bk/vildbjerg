@@ -142,12 +142,14 @@ function watchMatchInfo() {
         var opponent = match.team1 == 'SBK' ? match.team2 : match.team1;
         var isOngoing = match.startDateDelayed <= timeNow;
         if (!isOngoing) {
-          text += '<a href="kampe.html#m'+match.id+'">'+ match._class + ' <em>mod</em> ' + opponent + ' kl ' + match.startTime + ' (<a href="baner_stor.png">bane ' + match.place + '</bane>)</a></br>';
+          //text += '<a href="kampe.html#m'+match.id+'">'+ match._class + ' <em>mod</em> ' + opponent + ' kl ' + match.startTime + ' (<a href="baner_stor.png">bane ' + match.place + '</bane>)</a></br>';
+          text += match.startTime +'&nbsp;&nbsp; <strong>' + match._class + '</strong>, ' + 
+          match.team1 +' <em>mod</em> ' + match.team2 + ' (bane ' + match.place + ')</br>';
         }
       });
 
       todaysMatchesElmnt.innerHTML = '';
-      todaysMatchesElmnt.innerHTML = text.length > 0 ? '<div class="matchesHeader">Resten af dagens kampe</div>' + text : '';
+      todaysMatchesElmnt.innerHTML = text.length > 0 ? text : '';
     }
 
     if (allMatchesElmnt || adminElmnt) {
