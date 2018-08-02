@@ -231,7 +231,7 @@ function watchMatchInfo() {
               third = '<td colspan="2" style="text-align:right"><button onClick="reportScore('+match.id+','+match.score1+'+1,'+match.score2+')">'+match.team1+' '+match.score1+'</button> &nbsp; <button onClick="reportScore('+match.id+','+match.score1+'-1,'+match.score2+')">-</button> &nbsp; <button onClick="reportScore('+match.id+','+match.score1+','+match.score2+'+1)">'+match.team2+' '+match.score2+'</button> &nbsp; <button onClick="reportScore('+match.id+','+match.score1+','+match.score2+'-1)">-</button> &nbsp; <button onClick="finalizeScore('+match.id+', true)">Fin</button> &nbsp; <button onClick="finalizeScore('+match.id+', false)">Act</button></td>';
             }
             else {
-              third = '<td colspan="2" style="text-align:right"><button onClick="reportScore('+match.id+','+match.score1+'+1,'+match.score2+')">'+match.team1+' '+match.score1+'</button> &nbsp; <button onClick="reportScore('+match.id+','+match.score1+','+match.score2+'+1)">'+match.team2+' '+match.score2+'</button></td>';
+              third = '<td colspan="2" style="text-align:right"><button onClick="reportScore('+match.id+','+match.score1+'+1,'+match.score2+')">'+match.team1+' '+match.score1+'</button> &nbsp; <button onClick="reportScore('+match.id+','+match.score1+'-1,'+match.score2+')">-</button> &nbsp; <button onClick="reportScore('+match.id+','+match.score1+','+match.score2+'+1)">'+match.team2+' '+match.score2+'</button> &nbsp; <button onClick="reportScore('+match.id+','+match.score1+','+match.score2+'-1)">-</button></td>';
             }
           }
           else if (match.hasScore || match.finalized) {
