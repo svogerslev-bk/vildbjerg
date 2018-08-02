@@ -108,6 +108,13 @@ function watchMatchInfo() {
       }
     });
 
+    todaysMatches.sort(function(a, b){
+      return (a.startDate < b.startDate ? -1 : (a.startDate > b.startDate ? 1 : 0));
+    });
+    matches.sort(function(a, b){
+      return (a.startDate < b.startDate ? -1 : (a.startDate > b.startDate ? 1 : 0));
+    });
+
     if (nextMatchElmnt) {
       var text = '';
       todaysMatches.forEach(function(match) {
@@ -176,9 +183,6 @@ function watchMatchInfo() {
           if (match.date == date) {
             matchesToShow.push(match);
           }
-        });
-        matchesToShow.sort(function(a, b){
-          return (a.startDate < b.startDate ? -1 : (a.startDate > b.startDate ? 1 : 0));
         });
         matchesToShow.forEach(function(match) {
           var first = '<td id="m'+match.id+'">' + match.startTime +'&nbsp;&nbsp; <strong>' + match._class + '</strong>, ' + 
