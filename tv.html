@@ -42,18 +42,28 @@
         background-color: #fee;
       }
     </style>
-    <div style="width:500px; float:right; margin-right:20px; margin-top:20px  ">
+    <!-- <div style="width:500px; float:right; margin-right:20px; margin-top:20px  ">
       <a class="twitter-timeline"  href="https://twitter.com/search?q=%2B%40SvogerslevBK" data-partner="tweetdeck"data-widget-id="999429733300559872">Tweets about +@SvogerslevBK</a>
       <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-    </div>
+    </div> -->
 
     <!-- MAIN CONTENT -->
     <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner" style="max-width: unset; padding: 20px 20px; height:800px">
-        <h2 id="welcome-to-github-pages" style="background:none">Dagens kampe</h2>
-        <div id="todaysMatches" class="todaysMatchesTv" style="font-weight: unset"><p sbk-todays-matches-tv="sbk-todays-matches-tv"></p></div>
-      </section>
-    </div>
+        <section id="main_content" class="inner" style="max-width: unset; padding: 20px 20px; height:800px">
+    <table width="100%"  style="border:0">
+      <tr>
+        <td width="50%" style="border:0">
+                <h2 id="welcome-to-github-pages" style="background:none">Dagens kampe</h2>
+                <div id="todaysMatches" class="todaysMatchesTv" style="font-weight: unset"><p sbk-todays-matches-tv-left="sbk-todays-matches-tv-left"></p></div>
+        </td>
+        <td width="50%" style="border:0">
+                <h2 id="welcome-to-github-pages" style="background:none">&nbsp;</h2>
+                <div id="todaysMatches" class="todaysMatchesTv" style="font-weight: unset"><p sbk-todays-matches-tv-right="sbk-todays-matches-tv-right"></p></div>
+        </td>
+      </tr>
+    </table>
+  </section>
+</div>
 
 
   <!-- jQuery CDN -->

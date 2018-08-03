@@ -15,7 +15,8 @@ if (timeNow_month.length < 2) timeNow_month = '0' + timeNow_month;
 if (timeNow_day.length < 2) timeNow_day = '0' + timeNow_day;
 var year = timeNow_year;
 var todayString = timeNow_year+'-'+timeNow_month+'-'+timeNow_day;
-var nextMatchElmnt, todaysMatchesElmnt, todaysMatchesTvElmnt, allMatchesElmnt, adminElmnt;
+var nextMatchElmnt, todaysMatchesElmnt, todaysMatchesTvElmnt, allMatchesElmnt, adminElmnt,
+todaysMatchesTvLeftElmnt,todaysMatchesTvRightElmnt;
 
 function findElements() {
   var z, i, elmnt;
@@ -31,6 +32,12 @@ function findElements() {
     }
     else if (elmnt.getAttribute("sbk-todays-matches-tv")) {
       todaysMatchesTvElmnt = elmnt;
+    }
+    else if (elmnt.getAttribute("sbk-todays-matches-tv-left")) {
+      todaysMatchesTvLeftElmnt = elmnt;
+    }
+    else if (elmnt.getAttribute("sbk-todays-matches-tv-right")) {
+      todaysMatchesTvRightElmnt = elmnt;
     }
     else if (elmnt.getAttribute("sbk-all-matches")) {
       allMatchesElmnt = elmnt;
@@ -184,6 +191,48 @@ function watchMatchInfo() {
       todaysMatchesTvElmnt.innerHTML = text.length > 0 ? '<table>' + text + '</table>' : '';
     }
     
+    if (todaysMatchesTvLeftElmnt && todaysMatchesTvRightElmnt) {
+      var textLeft = '';
+      var textRight = '';
+      var p = Math.floor(todaysMatches.length / 2);
+      var todaysMatchesLeft = todaysMatches.slice(0, p); 
+      var todaysMatchesRight = todaysMatches.slice(p); 
+      todaysMatchesLeft.forEach(function(match) {
+        var first = '<td id="m'+match.id+'">' + match.startTime +'&nbsp;&nbsp; <strong>' + match._class + '</strong>, ' + 
+        match.team1 +' <em>mod</em> ' + match.team2 + ' (<a href="baner_stor.png">bane ' + match.place + '</a>)</td>';
+
+        var second = '';
+
+        if (match.hasScore || match.finalized) {
+          second = '<td style="text-align:right"><div class="score"><span style="white-space: nowrap;">'+match.score1+'&nbsp;-&nbsp;'+match.score2+'</span></div></td>';
+        }
+        else {
+          second = '<td></td>';
+        }
+
+        textLeft += '<tr class="oneMatch">'+first+second+'</tr>';
+      });
+      todaysMatchesRight.forEach(function(match) {
+        var first = '<td id="m'+match.id+'">' + match.startTime +'&nbsp;&nbsp; <strong>' + match._class + '</strong>, ' + 
+        match.team1 +' <em>mod</em> ' + match.team2 + ' (<a href="baner_stor.png">bane ' + match.place + '</a>)</td>';
+
+        var second = '';
+
+        if (match.hasScore || match.finalized) {
+          second = '<td style="text-align:right"><div class="score"><span style="white-space: nowrap;">'+match.score1+'&nbsp;-&nbsp;'+match.score2+'</span></div></td>';
+        }
+        else {
+          second = '<td></td>';
+        }
+
+        textRight += '<tr class="oneMatch">'+first+second+'</tr>';
+      });
+
+      todaysMatchesTvLeftElmnt.innerHTML = '';
+      todaysMatchesTvLeftElmnt.innerHTML = textLeft.length > 0 ? '<table>' + textLeft + '</table>' : '';
+      todaysMatchesTvRightElmnt.innerHTML = '';
+      todaysMatchesTvRightElmnt.innerHTML = textRight.length > 0 ? '<table>' + textRight + '</table>' : '';
+    }
 
     if (allMatchesElmnt || adminElmnt) {
       if (adminElmnt)
