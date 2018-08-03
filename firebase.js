@@ -281,7 +281,10 @@ function watchMatchInfo() {
               ' &nbsp; <button onClick="reportScore(\''+match.id+'\','+match.score1+','+match.score2+'-1)">-</button>'+
               ' &nbsp; <button onClick="finalizeScore(\''+match.id+'\', true)">Fin</button>'+
               ' &nbsp; <button onClick="finalizeScore(\''+match.id+'\', false)">Act</button>'+
-              ' &nbsp; <button onClick="deleteMatch(\''+match.id+'\')">Del</button></td>';
+              ' &nbsp; <button onClick="deleteMatch(\''+match.id+'\')">Del</button>'+
+              ' &nbsp; <input id="change_team2_'+match.id+'" />'+
+              ' &nbsp; <button onClick="changeTeam2Name(\''+match.id+'\',$(\'#change_team2_'+match.id+'\').val())">Chg</button>'+
+              '</td>';
             }
             else {
               third = '<td colspan="2" style="text-align:right">'+
@@ -351,6 +354,15 @@ function deleteMatch(id) {
   var result = confirm('Kampen vil blive slettet. ER DET KORREKT?');
   if (result) {
     firebase.database().ref('/primary/' + year + '/matches/' + id).remove();
+  }
+}
+
+function changeTeam2Name(id, name) {
+  var result = confirm('Dette vil ændre navnet på team2. Ok?');
+  if (result) {
+    firebase.database().ref('/primary/' + year + '/matches/' + id).update({
+      'team2': name
+    });
   }
 }
 
