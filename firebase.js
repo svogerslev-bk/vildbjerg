@@ -55,6 +55,7 @@ function watchMatchInfo() {
     snapshot.forEach(function(match) {
       var isTodaysMatch = false;
       var _class = null;
+      var group = 'pulje';
       var date = null;
       var team1 = null;
       var team2 = null;
@@ -90,6 +91,9 @@ function watchMatchInfo() {
         }
         else if (child.key == 'class') {
           _class = child.val();
+        }
+        else if (child.key == 'group') {
+          group = child.val();
         }
         else if (child.key == 'score1') {
           score1 = child.val();
@@ -130,7 +134,7 @@ function watchMatchInfo() {
       todaysMatches.forEach(function(match) {
         var isOngoing = match.startDateDelayed <= timeNow && match.endDateDelayed >= timeNow;
         if (isOngoing) {
-          var innerText =  '<div class="_class">' + match._class + '</div>' +
+          var innerText =  '<div class="_class">' + match._class + ' (' + match.group + ')</div>' +
           '<div class="teams">' + match.team1 + ' - ' + match.team2 + '</div>' +
           '<div class="whenWhere"> kl ' + match.startTime + ' på <a href="baner_stor.png">bane ' + match.place + '</a></div>';
           var score = match.hasScore || match.finalized ? match.score1 + '&nbsp;-&nbsp;' + match.score2 : '&nbsp; &nbsp; &nbsp; &nbsp;';
@@ -160,7 +164,7 @@ function watchMatchInfo() {
         var isOngoing = match.startDateDelayed <= timeNow;
         if (!isOngoing) {
           //text += '<a href="kampe.html#m'+match.id+'">'+ match._class + ' <em>mod</em> ' + opponent + ' kl ' + match.startTime + ' (<a href="baner_stor.png">bane ' + match.place + '</bane>)</a></br>';
-          text += match.startTime +'&nbsp;&nbsp; <strong>' + match._class + '</strong>, ' + 
+          text += match.startTime +'&nbsp;&nbsp; <strong>' + match._class + ' ('+ match.group +')</strong>, ' + 
           match.team1 +' <em>mod</em> ' + match.team2 + ' (bane ' + match.place + ')</br>';
         }
       });
@@ -172,7 +176,7 @@ function watchMatchInfo() {
     if (todaysMatchesTvElmnt) {
       var text = '';
       todaysMatches.forEach(function(match) {
-        var first = '<td id="m'+match.id+'">' + match.startTime +'&nbsp;&nbsp; <strong>' + match._class + '</strong>, ' + 
+        var first = '<td id="m'+match.id+'">' + match.startTime +'&nbsp;&nbsp; <strong>' + match._class + ' (' + match.group + ')</strong>, ' + 
         match.team1 +' <em>mod</em> ' + match.team2 + ' (<a href="baner_stor.png">bane ' + match.place + '</a>)</td>';
 
         var second = '';
@@ -198,7 +202,7 @@ function watchMatchInfo() {
       var todaysMatchesLeft = todaysMatches.slice(0, p); 
       var todaysMatchesRight = todaysMatches.slice(p); 
       todaysMatchesLeft.forEach(function(match) {
-        var first = '<td id="m'+match.id+'">' + match.startTime +'&nbsp;&nbsp; <strong>' + match._class + '</strong>, ' + 
+        var first = '<td id="m'+match.id+'">' + match.startTime +'&nbsp;&nbsp; <strong>' + match._class + ' ('+match.group+')</strong>, ' + 
         match.team1 +' <em>mod</em> ' + match.team2 + ' (<a href="baner_stor.png">bane ' + match.place + '</a>)</td>';
 
         var second = '';
@@ -213,7 +217,7 @@ function watchMatchInfo() {
         textLeft += '<tr class="oneMatch">'+first+second+'</tr>';
       });
       todaysMatchesRight.forEach(function(match) {
-        var first = '<td id="m'+match.id+'">' + match.startTime +'&nbsp;&nbsp; <strong>' + match._class + '</strong>, ' + 
+        var first = '<td id="m'+match.id+'">' + match.startTime +'&nbsp;&nbsp; <strong>' + match._class + ' ('+match.group+')</strong>, ' + 
         match.team1 +' <em>mod</em> ' + match.team2 + ' (<a href="baner_stor.png">bane ' + match.place + '</a>)</td>';
 
         var second = '';
@@ -260,7 +264,7 @@ function watchMatchInfo() {
           }
         });
         matchesToShow.forEach(function(match) {
-          var first = '<td id="m'+match.id+'">' + match.startTime +'&nbsp;&nbsp; <strong>' + match._class + '</strong>, ' + 
+          var first = '<td id="m'+match.id+'">' + match.startTime +'&nbsp;&nbsp; <strong>' + match._class  + ' ('+match.group+')</strong>, ' + 
           match.team1 +' <em>mod</em> ' + match.team2 + ' (<a href="baner_stor.png">bane ' + match.place + '</a>)</td>';
 
           var second = '';
