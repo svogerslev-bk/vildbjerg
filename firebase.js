@@ -271,19 +271,20 @@ function watchMatchInfo() {
             second = '<td></td>';
             if (adminElmnt) {
               third = '<td colspan="2" style="text-align:right">'+
-              '<button onClick="reportScore('+match.id+','+match.score1+'+1,'+match.score2+')">'+match.team1+' '+match.score1+'</button>'+
-              ' &nbsp; <button onClick="reportScore('+match.id+','+match.score1+'-1,'+match.score2+')">-</button>'+
-              ' &nbsp; <button onClick="reportScore('+match.id+','+match.score1+','+match.score2+'+1)">'+match.team2+' '+match.score2+'</button>'+
-              ' &nbsp; <button onClick="reportScore('+match.id+','+match.score1+','+match.score2+'-1)">-</button>'+
-              ' &nbsp; <button onClick="finalizeScore('+match.id+', true)">Fin</button>'+
-              ' &nbsp; <button onClick="finalizeScore('+match.id+', false)">Act</button></td>';
+              '<button onClick="reportScore(\''+match.id+'\','+match.score1+'+1,'+match.score2+')">'+match.team1+' '+match.score1+'</button>'+
+              ' &nbsp; <button onClick="reportScore(\''+match.id+'\','+match.score1+'-1,'+match.score2+')">-</button>'+
+              ' &nbsp; <button onClick="reportScore(\''+match.id+'\','+match.score1+','+match.score2+'+1)">'+match.team2+' '+match.score2+'</button>'+
+              ' &nbsp; <button onClick="reportScore(\''+match.id+'\','+match.score1+','+match.score2+'-1)">-</button>'+
+              ' &nbsp; <button onClick="finalizeScore(\''+match.id+'\', true)">Fin</button>'+
+              ' &nbsp; <button onClick="finalizeScore(\''+match.id+'\', false)">Act</button>'+
+              ' &nbsp; <button onClick="deleteMatch(\''+match.id+'\')">Del</button></td>';
             }
             else {
               third = '<td colspan="2" style="text-align:right">'+
-              '<button onClick="reportScore('+match.id+','+match.score1+'+1,'+match.score2+')">'+match.team1+' '+match.score1+'</button>'+
-              ' &nbsp; <button onClick="reportScore('+match.id+','+match.score1+'-1,'+match.score2+')">-</button>'+
-              ' &nbsp; <button onClick="reportScore('+match.id+','+match.score1+','+match.score2+'+1)">'+match.team2+' '+match.score2+'</button>'+
-              ' &nbsp; <button onClick="reportScore('+match.id+','+match.score1+','+match.score2+'-1)">-</button></td>';
+              '<button onClick="reportScore(\''+match.id+'\','+match.score1+'+1,'+match.score2+')">'+match.team1+' '+match.score1+'</button>'+
+              ' &nbsp; <button onClick="reportScore(\''+match.id+'\','+match.score1+'-1,'+match.score2+')">-</button>'+
+              ' &nbsp; <button onClick="reportScore(\''+match.id+'\','+match.score1+','+match.score2+'+1)">'+match.team2+' '+match.score2+'</button>'+
+              ' &nbsp; <button onClick="reportScore(\''+match.id+'\','+match.score1+','+match.score2+'-1)">-</button></td>';
             }
           }
           else if (match.hasScore || match.finalized) {
@@ -324,6 +325,29 @@ function reportScore(id, score1, score2) {
       score1: score1,
       score2: score2
     });
+  }
+}
+
+function addMatch(add_class, add_group, add_date, add_start_time, add_team2, add_place) {
+  var result = confirm('Dette vil tilføje en ny kamp. Er det korrekt?');
+  if (result) {
+    var id = firebase.database().ref('/primary/' + year + '/matches/').push().key;
+    firebase.database().ref('/primary/' + year + '/matches/' + id).update({
+      'class': add_class,
+      'group': add_group,
+      'date': add_date,
+      'start-time': add_start_time,
+      'team1' : 'SBK',
+      'team2' : add_team2,
+      'place': add_place
+    });
+  }
+}
+
+function deleteMatch(id) {
+  var result = confirm('Kampen vil blive slettet. ER DET KORREKT?');
+  if (result) {
+    firebase.database().ref('/primary/' + year + '/matches/' + id).remove();
   }
 }
 

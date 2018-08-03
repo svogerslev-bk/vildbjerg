@@ -53,6 +53,30 @@
         <section id="main_content" class="inner">
           <p><strong>Denne side er kun for administratorer af sitet!!</strong></p>
           <hr />
+          <table>
+            <tr>
+              <td>Række</td><td><input id="add_class" /></td>
+            </tr>
+            <tr>
+              <td>Pulje</td><td><input id="add_group" /></td>
+            </tr>
+            <tr>
+              <td>Dato</td><td><input id="add_date" /></td>
+            </tr>
+            <tr>
+              <td>Tid</td><td><input id="add_start_time" /></td>
+            </tr>
+            <tr>
+              <td>Hold2</td><td><input id="add_team2" /></td>
+            </tr>
+            <tr>
+              <td>Bane</td><td><input id="add_place" /></td>
+            </tr>
+            <tr>
+              <td></td><td><button onClick="addMatch($('#add_class').val(),$('#add_group').val(),$('#add_date').val(),$('#add_start_time').val(),$('#add_team2').val(),$('#add_place').val())">Tilføj</button></td>
+            </tr>
+            </table>
+
           <div class="allMatches"><p sbk-admin="sbk-admin"></p></div>
           <br /><br /><br /><br /><br /><br />
           <br /><br /><br /><br /><br /><br />
