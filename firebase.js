@@ -114,7 +114,7 @@ function watchMatchInfo() {
         startDateDelayed = new Date(dateSplit[0],dateSplit[1]-1,dateSplit[2],timeSplit[0],timeSplit[1]-10,0);
         endDateDelayed = new Date(dateSplit[0],dateSplit[1]-1,dateSplit[2],timeSplit[0],timeSplit[1]+60,0);
       }
-      var matchData = { id, date, place, _class, team1, team2, startTime, hasScore, 
+      var matchData = { id, date, place, _class, group, team1, team2, startTime, hasScore, 
         score1, score2, startDate, startDateDelayed, endDateDelayed, finalized };
       matches.push(matchData);
       if (isTodaysMatch) {
